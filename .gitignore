@@ -1,0 +1,24 @@
+# Dependencies
+node_modules
+
+# Next.js
+.next/
+out/
+
+# Development
+*.log
+.env*.local
+
+# Testing
+coverage/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+/lib/generated/prisma
