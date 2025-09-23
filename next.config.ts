@@ -17,15 +17,13 @@ const nextConfig: NextConfig = {
     formats: ['image/avif', 'image/webp'],
   },
 
+  typedRoutes: true,
+
   experimental: {
-    // Enable Partial Prerendering
-    ppr: true,
     // Enable Server Actions
     serverActions: {
       bodySizeLimit: '2mb',
     },
-    // Typed Routes
-    typedRoutes: true,
   },
 
   async headers() {

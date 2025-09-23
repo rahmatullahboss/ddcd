@@ -7,6 +7,7 @@ out/
 
 # Development
 *.log
+.env
 .env*.local
 
 # Testing

@@ -38,3 +38,8 @@ This repository contains the migrated version of the Digital Care website to Nex
 - React Hook Form + Zod
 - Framer Motion
 - Lucide React
+
+## Deployment Notes
+- `.env` files are excluded from git for security
+- All packages have been upgraded to versions compatible with React 19
+- Vercel deployment configured with appropriate build settings
