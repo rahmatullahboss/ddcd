@@ -1,9 +1,6 @@
-import { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'My Prescriptions',
-  description: 'View and manage your prescriptions',
-}
+import { useState } from 'react'
 
 // Mock data for prescriptions
 const prescriptions = [
@@ -43,6 +40,19 @@ const prescriptions = [
 ]
 
 export default function PrescriptionsPage() {
+  const [selectedPrescription, setSelectedPrescription] = useState<string | null>(null)
+
+  const handleViewDetails = (id: string) => {
+    setSelectedPrescription(id)
+    // In a real app, this would open a modal or navigate to a detail page
+    console.log('View details for prescription:', id)
+  }
+
+  const handleRefill = (id: string) => {
+    // In a real app, this would initiate a refill request
+    console.log('Refill prescription:', id)
+  }
+
   return (
     <div className="py-6">
       <div className="mb-8">
@@ -90,11 +100,17 @@ export default function PrescriptionsPage() {
               </div>
               
               <div className="mt-4 md:mt-0 flex space-x-3">
-                <button className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+                <button 
+                  onClick={() => handleViewDetails(prescription.id)}
+                  className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
+                >
                   View Details
                 </button>
                 {prescription.status === 'active' && (
-                  <button className="border border-teal-600 text-teal-600 hover:bg-teal-50 font-medium py-2 px-4 rounded-lg transition duration-300">
+                  <button 
+                    onClick={() => handleRefill(prescription.id)}
+                    className="border border-teal-600 text-teal-600 hover:bg-teal-50 font-medium py-2 px-4 rounded-lg transition duration-300"
+                  >
                     Refill
                   </button>
                 )}

@@ -1,9 +1,6 @@
-import { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Medical Records',
-  description: 'Access your medical records and test results',
-}
+import { useState } from 'react'
 
 // Mock data for medical records
 const medicalRecords = [
@@ -46,6 +43,34 @@ const medicalRecords = [
 ]
 
 export default function MedicalRecordsPage() {
+  const [selectedRecord, setSelectedRecord] = useState<string | null>(null)
+
+  const handleViewRecord = (id: string) => {
+    setSelectedRecord(id)
+    // In a real app, this would open a modal or navigate to a detail page
+    console.log('View record:', id)
+  }
+
+  const handleDownloadRecord = (id: string) => {
+    // In a real app, this would download the record
+    console.log('Download record:', id)
+  }
+
+  const handleRequestRecords = () => {
+    // In a real app, this would open a request form
+    console.log('Request medical records')
+  }
+
+  const handleShareRecords = () => {
+    // In a real app, this would open a sharing form
+    console.log('Share medical records')
+  }
+
+  const handleUploadFiles = () => {
+    // In a real app, this would open an upload dialog
+    console.log('Upload files')
+  }
+
   return (
     <div className="py-6">
       <div className="mb-8">
@@ -98,10 +123,16 @@ export default function MedicalRecordsPage() {
                     {record.files} files
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                    <button className="text-teal-600 hover:text-teal-900 mr-3">
+                    <button 
+                      onClick={() => handleViewRecord(record.id)}
+                      className="text-teal-600 hover:text-teal-900 mr-3"
+                    >
                       View
                     </button>
-                    <button className="text-blue-600 hover:text-blue-900">
+                    <button 
+                      onClick={() => handleDownloadRecord(record.id)}
+                      className="text-blue-600 hover:text-blue-900"
+                    >
                       Download
                     </button>
                   </td>
@@ -116,7 +147,10 @@ export default function MedicalRecordsPage() {
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Request Medical Records</h2>
           <p className="text-gray-600 mb-4">Request access to specific medical records or test results.</p>
-          <button className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+          <button 
+            onClick={handleRequestRecords}
+            className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
+          >
             Submit Request
           </button>
         </div>
@@ -124,7 +158,10 @@ export default function MedicalRecordsPage() {
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Share with Provider</h2>
           <p className="text-gray-600 mb-4">Securely share your medical records with another healthcare provider.</p>
-          <button className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+          <button 
+            onClick={handleShareRecords}
+            className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
+          >
             Share Records
           </button>
         </div>
@@ -132,7 +169,10 @@ export default function MedicalRecordsPage() {
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-xl font-bold text-gray-900 mb-4">Upload Documents</h2>
           <p className="text-gray-600 mb-4">Upload medical documents or test results from external providers.</p>
-          <button className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+          <button 
+            onClick={handleUploadFiles}
+            className="w-full bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
+          >
             Upload Files
           </button>
         </div>

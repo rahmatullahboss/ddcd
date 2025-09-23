@@ -1,9 +1,6 @@
-import { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'My Appointments',
-  description: 'View and manage your upcoming and past appointments',
-}
+import { useState } from 'react'
 
 // Mock data for appointments
 const appointments = [
@@ -46,6 +43,29 @@ const appointments = [
 ]
 
 export default function AppointmentsPage() {
+  const [selectedAppointment, setSelectedAppointment] = useState<string | null>(null)
+
+  const handleReschedule = (id: string) => {
+    setSelectedAppointment(id)
+    // In a real app, this would open a rescheduling form
+    console.log('Reschedule appointment:', id)
+  }
+
+  const handleCancel = (id: string) => {
+    // In a real app, this would cancel the appointment
+    console.log('Cancel appointment:', id)
+  }
+
+  const handleViewDetails = (id: string) => {
+    // In a real app, this would show appointment details
+    console.log('View details for appointment:', id)
+  }
+
+  const handleBookNew = () => {
+    // In a real app, this would navigate to booking page
+    console.log('Book new appointment')
+  }
+
   return (
     <div className="py-6">
       <div className="mb-8">
@@ -100,16 +120,25 @@ export default function AppointmentsPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                     {appointment.status === 'confirmed' || appointment.status === 'pending' ? (
-                      <button className="text-teal-600 hover:text-teal-900 mr-3">
+                      <button 
+                        onClick={() => handleReschedule(appointment.id)}
+                        className="text-teal-600 hover:text-teal-900 mr-3"
+                      >
                         Reschedule
                       </button>
                     ) : null}
                     {appointment.status === 'confirmed' || appointment.status === 'pending' ? (
-                      <button className="text-red-600 hover:text-red-900">
+                      <button 
+                        onClick={() => handleCancel(appointment.id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
                         Cancel
                       </button>
                     ) : (
-                      <button className="text-teal-600 hover:text-teal-900">
+                      <button 
+                        onClick={() => handleViewDetails(appointment.id)}
+                        className="text-teal-600 hover:text-teal-900"
+                      >
                         View Details
                       </button>
                     )}
@@ -122,7 +151,10 @@ export default function AppointmentsPage() {
       </div>
 
       <div className="mt-6">
-        <button className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300">
+        <button 
+          onClick={handleBookNew}
+          className="bg-teal-600 hover:bg-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
+        >
           Book New Appointment
         </button>
       </div>
