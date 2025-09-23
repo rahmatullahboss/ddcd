@@ -1,11 +1,21 @@
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-08-27.basil',
-})
+// Initialize Stripe only if the API key is provided
+let stripe: Stripe | null = null
+if (process.env.STRIPE_SECRET_KEY) {
+  stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2025-08-27.basil',
+  })
+}
 
 export async function POST(request: Request) {
+  // If Stripe is not configured, return early
+  if (!stripe) {
+    console.warn('Stripe not configured - webhook endpoint disabled')
+    return NextResponse.json({ received: true })
+  }
+
   try {
     const body = await request.text()
     const signature = request.headers.get('stripe-signature') as string
