@@ -40,8 +40,9 @@ const services = [
   }
 ]
 
-export async function generateMetadata({ params }: { params: { service: string } }) {
-  const service = services.find(s => s.id === params.service)
+export async function generateMetadata({ params }: { params: Promise<{ service: string }> }) {
+  const { service: serviceId } = await params
+  const service = services.find(s => s.id === serviceId)
   
   if (!service) {
     return {
@@ -55,8 +56,9 @@ export async function generateMetadata({ params }: { params: { service: string }
   }
 }
 
-export default function ServiceDetailPage({ params }: { params: { service: string } }) {
-  const service = services.find(s => s.id === params.service)
+export default async function ServiceDetailPage({ params }: { params: Promise<{ service: string }> }) {
+  const { service: serviceId } = await params
+  const service = services.find(s => s.id === serviceId)
 
   if (!service) {
     notFound()

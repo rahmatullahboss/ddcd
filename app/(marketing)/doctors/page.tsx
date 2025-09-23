@@ -10,11 +10,12 @@ export const metadata: Metadata = {
 export default async function DoctorsPage({
   searchParams,
 }: {
-  searchParams: { specialty?: string; search?: string }
+  searchParams: Promise<{ specialty?: string; search?: string }>
 }) {
+  const { specialty, search } = await searchParams
   const doctors = await getDoctors({
-    specialty: searchParams.specialty,
-    search: searchParams.search,
+    specialty: specialty,
+    search: search,
   })
 
   return (

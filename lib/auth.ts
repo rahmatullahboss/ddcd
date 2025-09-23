@@ -1,4 +1,4 @@
-import { auth } from '@/app/api/auth/[...nextauth]/route'
+import { auth } from '@/lib/auth-utils'
 import type { User } from 'next-auth'
 
 // Extend the User type to include role

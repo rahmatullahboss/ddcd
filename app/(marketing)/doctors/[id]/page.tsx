@@ -44,8 +44,9 @@ const doctors = [
   }
 ]
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const doctor = doctors.find(d => d.id === params.id)
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const doctor = doctors.find(d => d.id === id)
   
   if (!doctor) {
     return {
@@ -59,8 +60,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   }
 }
 
-export default function DoctorDetailPage({ params }: { params: { id: string } }) {
-  const doctor = doctors.find(d => d.id === params.id)
+export default async function DoctorDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const doctor = doctors.find(d => d.id === id)
 
   if (!doctor) {
     notFound()
