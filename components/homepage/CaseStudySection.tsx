@@ -41,7 +41,7 @@ export default function CaseStudySection() {
           </div>
           <div className="glass-card case-video" data-animate="fade-left">
             <div className="relative w-full pt-[56.25%]">
-              <iframe className="absolute inset-0 w-full h-full" src="https://www.loom.com/embed/d7f841578f3344cda179023e683d2e2e?sid=3d051e6d-96f8-4c9a-80a2-77b99122fbd1" frameBorder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowFullScreen></iframe>
+              <iframe className="absolute inset-0 w-full h-full" src="https://www.loom.com/embed/d7f841578f3344cda179023e683d2e2e?sid=3d051e6d-96f8-4c9a-80a2-77b99122fbd1" frameBorder="0" allowFullScreen></iframe>
             </div>
           </div>
         </div>
