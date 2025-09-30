@@ -127,7 +127,7 @@ export default function HeroSection() {
             <span className="hero-kicker inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-teal-700 shadow-sm shadow-teal-200/60 backdrop-blur">
               <i className="fa-solid fa-shapes text-teal-500"></i> ডিজিটাল সলিউশনস এজেন্সি
             </span>
-            <h1 className="hero-heading text-5xl md:text-5xl font-bold leading-normal text-slate-900">
+            <h1 className="hero-heading text-4xl md:text-5xl font-bold leading-normal text-slate-900">
               আপনার <span id="industry-text" className="inline-block rounded-full bg-white/70 px-3 py-1 text-teal-600 shadow-inner shadow-white/60">{industryText}</span> <span className="bg-gradient-to-r from-teal-500 via-emerald-500 to-sky-500 bg-clip-text text-transparent">ডিজিটাল রূপান্তর</span> এখানেই শুরু
             </h1>
             <p className="hero-subtitle text-lg md:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0">
