@@ -34,6 +34,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true
+  },
+  icons: {
+    icon: '/Digital care favicon.webp',
+  },
+  other: {
+    "google-fonts": "https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap",
+    "font-awesome": "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css",
   }
 }
 
@@ -46,15 +53,19 @@ export const viewport: Viewport = {
   initialScale: 1
 }
 
+import Script from "next/script"
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="bn" className="scroll-smooth" suppressHydrationWarning>
       <body className={inter.variable}>
         {children}
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" strategy="afterInteractive" />
+        <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" strategy="afterInteractive" />
       </body>
     </html>
   )
