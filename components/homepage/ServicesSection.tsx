@@ -8,14 +8,6 @@ export default function ServicesSection() {
         <span className="section-orb services-orb-1" data-parallax-depth="0.18"></span>
         <span className="section-orb services-orb-2" data-parallax-depth="0.24"></span>
         <span className="section-pill services-pill" data-parallax-depth="0.1"></span>
-        <div className="floating-chip hidden md:flex" style={{top: '10%', left: '6%'}} data-parallax-depth="0.22">
-          <i className="fa-solid fa-sparkles"></i>
-          ৯৭% গ্রাহক সন্তুষ্টি
-        </div>
-        <div className="floating-chip hidden md:flex" style={{bottom: '12%', right: '8%'}} data-parallax-depth="0.16">
-          <i className="fa-solid fa-rocket"></i>
-          গড় ROI ৩.৫x
-        </div>
       </div>
       <div className="section-content container mx-auto px-6">
         <div className="text-center mb-12 max-w-3xl mx-auto space-y-4">
