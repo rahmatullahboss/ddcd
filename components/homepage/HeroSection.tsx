@@ -128,7 +128,7 @@ export default function HeroSection() {
               <i className="fa-solid fa-shapes text-teal-500"></i> ডিজিটাল সলিউশনস এজেন্সি
             </span>
             <h1 className="hero-heading text-4xl md:text-5xl font-bold leading-normal text-slate-900">
-              আপনার <span id="industry-text" className="inline-block rounded-full bg-white/70 px-4 py-2 text-teal-600 shadow-inner shadow-white/60">{industryText}</span> <span className="bg-gradient-to-r from-teal-500 via-emerald-500 to-sky-500 bg-clip-text text-transparent">ডিজিটাল রূপান্তর</span> এখানেই শুরু
+              আপনার <span id="industry-text" className="inline-block rounded-full bg-white/70 px-6 py-3 text-teal-600 shadow-inner shadow-white/60">{industryText}</span> <span className="bg-gradient-to-r from-teal-500 via-emerald-500 to-sky-500 bg-clip-text text-transparent">ডিজিটাল রূপান্তর</span> এখানেই শুরু
             </h1>
             <p className="hero-subtitle text-lg md:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0">
               এজেন্সি-গ্রেড ডিজাইন, স্বয়ংক্রিয় গ্রাহক সংযোগ এবং ডেটা-ভিত্তিক মার্কেটিং — সবকিছু এক জায়গায়। আমাদের সাথে যুক্ত হন এবং প্রতিটি ডিজিটাল স্পর্শবিন্দুকে একটি বিক্রয় যাত্রায় পরিণত করুন।
