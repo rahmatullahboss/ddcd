@@ -5,16 +5,18 @@ import { OrderStatus } from '@prisma/client';
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { orderId: string } }
+  { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
+    const { orderId } = await params;
+    
     const role = await currentRole();
 
     if (role !== 'ADMIN') {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    if (!params.orderId) {
+    if (!orderId) {
       return new NextResponse('Order ID is required', { status: 400 });
     }
 
@@ -26,7 +28,7 @@ export async function PATCH(
 
     const order = await db.order.update({
       where: {
-        id: params.orderId,
+        id: orderId,
       },
       data: {
         status,

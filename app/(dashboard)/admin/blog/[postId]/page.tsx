@@ -2,15 +2,18 @@ import { db } from '@/lib/db';
 import PostForm from './_components/post-form';
 
 interface PostPageProps {
-  params: {
+  params: Promise<{
     postId: string;
-  };
+  }>;
 }
 
 export default async function PostPage({ params }: PostPageProps) {
+  // Resolve the params promise
+  const { postId } = await params;
+  
   const post = await db.post.findUnique({
     where: {
-      id: params.postId,
+      id: postId,
     },
   });
 

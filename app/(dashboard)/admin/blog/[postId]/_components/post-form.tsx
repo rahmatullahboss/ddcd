@@ -34,14 +34,22 @@ export default function PostForm({ initialData }: PostFormProps) {
   const toastMessage = initialData ? 'Post updated.' : 'Post created.';
   const action = initialData ? 'Save changes' : 'Create post';
 
+  // Create default values that match the form schema
+  const defaultValues = initialData ? {
+    title: initialData.title,
+    content: initialData.content,
+    imageUrl: initialData.imageUrl || '',
+    category: initialData.category || '',
+  } : {
+    title: '',
+    content: '',
+    imageUrl: '',
+    category: '',
+  };
+
   const form = useForm<PostFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData || {
-      title: '',
-      content: '',
-      imageUrl: '',
-      category: '',
-    },
+    defaultValues,
   });
 
   const onSubmit = async (data: PostFormValues) => {
@@ -67,7 +75,7 @@ export default function PostForm({ initialData }: PostFormProps) {
       }
 
       router.refresh();
-      router.push('/dashboard/admin/blog');
+      router.push('/dashboard/admin/blog' as any);
       toast.success(toastMessage);
 
     } catch (error) {

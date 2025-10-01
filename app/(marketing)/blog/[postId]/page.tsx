@@ -1,5 +1,6 @@
 import { Post } from '@prisma/client';
 import Image from 'next/image';
+import { db } from '@/lib/db';
 
 type PostWithAuthor = Post & {
     author: {
@@ -9,11 +10,20 @@ type PostWithAuthor = Post & {
 
 async function getPost(postId: string): Promise<PostWithAuthor | null> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog/${postId}`, { cache: 'no-store' });
-    if (!res.ok) {
-      return null;
-    }
-    return res.json();
+    // Use database query instead of fetch for static rendering
+    const post = await db.post.findUnique({
+      where: {
+        id: postId,
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    return post;
   } catch (error) {
     console.error(error);
     return null;
@@ -21,13 +31,16 @@ async function getPost(postId: string): Promise<PostWithAuthor | null> {
 }
 
 interface PostDetailsPageProps {
-  params: {
+  params: Promise<{
     postId: string;
-  };
+  }>;
 }
 
 export default async function PostDetailsPage({ params }: PostDetailsPageProps) {
-  const post = await getPost(params.postId);
+  // Resolve the params promise
+  const { postId } = await params;
+  
+  const post = await getPost(postId);
 
   if (!post) {
     return (

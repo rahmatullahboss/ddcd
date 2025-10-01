@@ -4,16 +4,18 @@ import { currentRole } from '@/lib/auth';
 
 export async function GET(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
   try {
-    if (!params.productId) {
+    const { productId } = await params;
+    
+    if (!productId) {
       return new NextResponse('Product ID is required', { status: 400 });
     }
 
     const product = await db.product.findUnique({
       where: {
-        id: params.productId,
+        id: productId,
       },
     });
 
@@ -30,16 +32,18 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
   try {
+    const { productId } = await params;
+    
     const role = await currentRole();
 
     if (role !== 'ADMIN') {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    if (!params.productId) {
+    if (!productId) {
       return new NextResponse('Product ID is required', { status: 400 });
     }
 
@@ -47,7 +51,7 @@ export async function PATCH(
 
     const product = await db.product.update({
       where: {
-        id: params.productId,
+        id: productId,
       },
       data: {
         ...values,
@@ -63,22 +67,24 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { productId: string } }
+  { params }: { params: Promise<{ productId: string }> }
 ) {
   try {
+    const { productId } = await params;
+    
     const role = await currentRole();
 
     if (role !== 'ADMIN') {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    if (!params.productId) {
+    if (!productId) {
       return new NextResponse('Product ID is required', { status: 400 });
     }
 
     const product = await db.product.delete({
       where: {
-        id: params.productId,
+        id: productId,
       },
     });
 

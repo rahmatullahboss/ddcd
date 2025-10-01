@@ -4,16 +4,18 @@ import { currentRole } from '@/lib/auth';
 
 export async function GET(
   req: Request,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
-    if (!params.postId) {
+    const { postId } = await params;
+    
+    if (!postId) {
       return new NextResponse('Post ID is required', { status: 400 });
     }
 
     const post = await db.post.findUnique({
       where: {
-        id: params.postId,
+        id: postId,
       },
       include: {
         author: {
@@ -37,16 +39,18 @@ export async function GET(
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
+    const { postId } = await params;
+    
     const role = await currentRole();
 
     if (role !== 'ADMIN') {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    if (!params.postId) {
+    if (!postId) {
       return new NextResponse('Post ID is required', { status: 400 });
     }
 
@@ -54,7 +58,7 @@ export async function PATCH(
 
     const post = await db.post.update({
       where: {
-        id: params.postId,
+        id: postId,
       },
       data: {
         ...values,
@@ -70,22 +74,24 @@ export async function PATCH(
 
 export async function DELETE(
   req: Request,
-  { params }: { params: { postId: string } }
+  { params }: { params: Promise<{ postId: string }> }
 ) {
   try {
+    const { postId } = await params;
+    
     const role = await currentRole();
 
     if (role !== 'ADMIN') {
       return new NextResponse('Unauthorized', { status: 401 });
     }
 
-    if (!params.postId) {
+    if (!postId) {
       return new NextResponse('Post ID is required', { status: 400 });
     }
 
     const post = await db.post.delete({
       where: {
-        id: params.postId,
+        id: postId,
       },
     });
 

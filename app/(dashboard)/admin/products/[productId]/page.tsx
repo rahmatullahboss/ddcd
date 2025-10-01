@@ -2,15 +2,18 @@ import { db } from '@/lib/db';
 import ProductForm from './_components/product-form';
 
 interface ProductPageProps {
-  params: {
+  params: Promise<{
     productId: string;
-  };
+  }>;
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
+  // Resolve the params promise
+  const { productId } = await params;
+  
   const product = await db.product.findUnique({
     where: {
-      id: params.productId,
+      id: productId,
     },
   });
 

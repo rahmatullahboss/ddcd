@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Package, FileText, ShoppingCart } from 'lucide-react';
 
@@ -13,8 +12,10 @@ export default function AdminDashboardPage() {
           <Package className="h-8 w-8 text-primary mb-4" />
           <h2 className="text-xl font-bold mb-2">Manage Products</h2>
           <p className="text-gray-600 mb-4">Add, edit, or remove products from your store.</p>
-          <Button asChild>
-            <Link href="/dashboard/admin/products">Go to Products</Link>
+          <Button>
+            <a href="/dashboard/admin/products" className="text-white no-underline">
+              Go to Products
+            </a>
           </Button>
         </div>
 
@@ -23,8 +24,10 @@ export default function AdminDashboardPage() {
           <FileText className="h-8 w-8 text-primary mb-4" />
           <h2 className="text-xl font-bold mb-2">Manage Blog</h2>
           <p className="text-gray-600 mb-4">Create, edit, or delete blog posts.</p>
-          <Button asChild>
-            <Link href="/dashboard/admin/blog">Go to Blog</Link>
+          <Button>
+            <a href="/dashboard/admin/blog" className="text-white no-underline">
+              Go to Blog
+            </a>
           </Button>
         </div>
 
@@ -33,8 +36,10 @@ export default function AdminDashboardPage() {
           <ShoppingCart className="h-8 w-8 text-primary mb-4" />
           <h2 className="text-xl font-bold mb-2">Manage Orders</h2>
           <p className="text-gray-600 mb-4">View and update the status of customer orders.</p>
-          <Button asChild>
-            <Link href="/dashboard/admin/orders">Go to Orders</Link>
+          <Button>
+            <a href="/dashboard/admin/orders" className="text-white no-underline">
+              Go to Orders
+            </a>
           </Button>
         </div>
 

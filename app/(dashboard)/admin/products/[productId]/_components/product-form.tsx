@@ -36,19 +36,26 @@ export default function ProductForm({ initialData }: ProductFormProps) {
   const toastMessage = initialData ? 'Product updated.' : 'Product created.';
   const action = initialData ? 'Save changes' : 'Create product';
 
+  // Create default values that match the form schema
+  const defaultValues = initialData ? {
+    name: initialData.name,
+    description: initialData.description,
+    price: parseFloat(String(initialData.price)),
+    imageUrl: initialData.imageUrl || '',
+    category: initialData.category || '',
+    digitalFileUrl: initialData.digitalFileUrl || '',
+  } : {
+    name: '',
+    description: '',
+    price: 0,
+    imageUrl: '',
+    category: '',
+    digitalFileUrl: '',
+  };
+
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData ? {
-        ...initialData,
-        price: parseFloat(String(initialData.price)),
-    } : {
-      name: '',
-      description: '',
-      price: 0,
-      imageUrl: '',
-      category: '',
-      digitalFileUrl: '',
-    },
+    defaultValues,
   });
 
   const onSubmit = async (data: ProductFormValues) => {
@@ -74,7 +81,7 @@ export default function ProductForm({ initialData }: ProductFormProps) {
       }
 
       router.refresh();
-      router.push('/dashboard/admin/products');
+      router.push('/dashboard/admin/products' as any);
       toast.success(toastMessage);
 
     } catch (error) {

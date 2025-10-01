@@ -66,7 +66,7 @@ export default function PostsClient({ posts: initialPosts }: PostsClientProps) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => router.push(`/dashboard/admin/blog/${post.id}`)}
+                  onClick={() => router.push(`/dashboard/admin/blog/${post.id}` as any)}
                 >
                   <Edit className="h-4 w-4" />
                 </Button>

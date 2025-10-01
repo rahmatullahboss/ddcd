@@ -60,7 +60,7 @@ export default function ProductsClient({ products: initialProducts }: ProductsCl
                 <Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => router.push(`/dashboard/admin/products/${product.id}`)}
+                  onClick={() => router.push(`/dashboard/admin/products/${product.id}` as any)}
                 >
                   <Edit className="h-4 w-4" />
                 </Button>

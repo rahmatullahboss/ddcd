@@ -1,14 +1,17 @@
 import { Product } from '@prisma/client';
 import Image from 'next/image';
 import AddToCartButton from '@/components/shop/add-to-cart-button';
+import { db } from '@/lib/db';
 
 async function getProduct(productId: string): Promise<Product | null> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products/${productId}`, { cache: 'no-store' });
-    if (!res.ok) {
-      return null;
-    }
-    return res.json();
+    // Use database query instead of fetch for static rendering
+    const product = await db.product.findUnique({
+      where: {
+        id: productId,
+      },
+    });
+    return product;
   } catch (error) {
     console.error(error);
     return null;
@@ -16,13 +19,16 @@ async function getProduct(productId: string): Promise<Product | null> {
 }
 
 interface ProductDetailsPageProps {
-  params: {
+  params: Promise<{
     productId: string;
-  };
+  }>;
 }
 
 export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
-  const product = await getProduct(params.productId);
+  // Resolve the params promise
+  const { productId } = await params;
+  
+  const product = await getProduct(productId);
 
   if (!product) {
     return (

@@ -1,17 +1,17 @@
 import { Product } from '@prisma/client';
 import { Suspense } from 'react';
 import ProductCard from '@/components/shop/product-card';
+import { db } from '@/lib/db';
 
 async function getProducts(): Promise<Product[]> {
-  // In a real app, you'd fetch from an API route.
-  // For simplicity, we'll call the API logic directly.
-  // This approach is fine for Server Components.
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/products`, { cache: 'no-store' });
-    if (!res.ok) {
-      throw new Error('Failed to fetch products');
-    }
-    return res.json();
+    // Use database query instead of fetch for static rendering
+    const products = await db.product.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+    return products;
   } catch (error) {
     console.error(error);
     return [];

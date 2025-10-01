@@ -1,6 +1,7 @@
 import { Post } from '@prisma/client';
 import { Suspense } from 'react';
 import PostCard from '@/components/blog/post-card';
+import { db } from '@/lib/db';
 
 type PostWithAuthor = Post & {
     author: {
@@ -10,11 +11,20 @@ type PostWithAuthor = Post & {
 
 async function getPosts(): Promise<PostWithAuthor[]> {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/blog`, { cache: 'no-store' });
-    if (!res.ok) {
-      throw new Error('Failed to fetch posts');
-    }
-    return res.json();
+    // Use database query instead of fetch for static rendering
+    const posts = await db.post.findMany({
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    return posts;
   } catch (error) {
     console.error(error);
     return [];

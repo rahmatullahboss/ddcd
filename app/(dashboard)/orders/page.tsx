@@ -1,46 +1,39 @@
-"use client";
-
-import { useState, useEffect } from 'react';
 import { Order, OrderItem, Product } from '@prisma/client';
-import { useCurrentUser } from '@/hooks/use-current-user';
 import { Badge } from '@/components/ui/badge';
+import { auth } from '@/lib/auth-utils';
 
 type OrderWithDetails = Order & {
   orderItems: (OrderItem & { product: Product })[];
 };
 
-export default function MyOrdersPage() {
-  const user = useCurrentUser();
-  const [orders, setOrders] = useState<OrderWithDetails[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (user) {
-      const fetchOrders = async () => {
-        try {
-          const response = await fetch('/api/orders');
-          if (!response.ok) {
-            throw new Error('Failed to fetch orders.');
-          }
-          const data = await response.json();
-          setOrders(data);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setIsLoading(false);
-        }
-      };
-      fetchOrders();
+async function getOrders(userId: string) {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/orders`, {
+      headers: {
+        'user-id': userId,
+      },
+      cache: 'no-store'
+    });
+    
+    if (!res.ok) {
+      return [];
     }
-  }, [user]);
-
-  if (isLoading) {
-    return <div className="container mx-auto py-12 text-center">Loading your orders...</div>;
+    
+    return res.json();
+  } catch (error) {
+    console.error(error);
+    return [];
   }
+}
 
-  if (!user) {
+export default async function MyOrdersPage() {
+  const session = await auth();
+  
+  if (!session?.user?.id) {
     return <div className="container mx-auto py-12 text-center">Please log in to see your orders.</div>;
   }
+  
+  const orders = await getOrders(session.user.id);
 
   if (orders.length === 0) {
     return <div className="container mx-auto py-12 text-center">You have no orders yet.</div>;
@@ -50,7 +43,7 @@ export default function MyOrdersPage() {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-8">My Orders</h1>
       <div className="space-y-6">
-        {orders.map((order) => (
+        {orders.map((order: OrderWithDetails) => (
           <div key={order.id} className="border rounded-lg p-6 bg-white shadow-sm">
             <div className="flex justify-between items-start mb-4">
               <div>
