@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { type Route } from 'next';
 
 const posts = [
   {
@@ -76,7 +77,7 @@ export default function BlogPage() {
                   <span className="mx-2">&bull;</span>
                   <span>{featuredPost.readTime}</span>
                 </div>
-                <Link href={`/blog/${featuredPost.slug}`} className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-teal-500 via-emerald-500 to-sky-500 px-6 py-3 font-semibold text-white shadow-lg shadow-teal-500/40 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+                <Link href={(`/blog/${featuredPost.slug}`) as Route} className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-teal-500 via-emerald-500 to-sky-500 px-6 py-3 font-semibold text-white shadow-lg shadow-teal-500/40 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl">
                   পুরোটা পড়ুন &rarr;
                 </Link>
               </div>
@@ -100,7 +101,7 @@ export default function BlogPage() {
                     <span className="mx-2">&bull;</span>
                     <span>{post.readTime}</span>
                   </div>
-                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-teal-700 rounded-full border border-teal-200/70 bg-white/70 shadow-sm shadow-teal-200/60 transition duration-300 hover:-translate-y-0.5 hover:border-teal-400 hover:text-teal-600">
+                  <Link href={(`/blog/${post.slug}`) as Route} className="inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold text-teal-700 rounded-full border border-teal-200/70 bg-white/70 shadow-sm shadow-teal-200/60 transition duration-300 hover:-translate-y-0.5 hover:border-teal-400 hover:text-teal-600">
                     পড়ুন
                   </Link>
                 </div>

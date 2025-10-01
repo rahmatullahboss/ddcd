@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { type Route } from 'next';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -57,7 +58,7 @@ export default function Header() {
         </Link>
         <div className="hidden md:flex space-x-6 items-center">
           {navLinks.map(link => (
-            <Link key={link.href} href={link.href} className="text-gray-600 hover:text-teal-600">
+            <Link key={link.href} href={link.href as Route} className="text-gray-600 hover:text-teal-600">
               {link.text}
             </Link>
           ))}
@@ -76,7 +77,7 @@ export default function Header() {
       {/* Mobile Menu */}
       <div id="mobile-menu" className={`md:hidden ${menuOpen ? '' : 'hidden'} px-6 pb-4 space-y-2`}>
         {navLinks.map(link => (
-          <Link key={link.href} href={link.href} className="block text-gray-600 hover:text-teal-600" onClick={() => setMenuOpen(false)}>
+          <Link key={link.href} href={link.href as Route} className="block text-gray-600 hover:text-teal-600" onClick={() => setMenuOpen(false)}>
             {link.text}
           </Link>
         ))}
