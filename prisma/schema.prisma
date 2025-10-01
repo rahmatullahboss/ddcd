@@ -26,6 +26,59 @@ model User {
   doctor          Doctor?
   accounts        Account[]
   sessions        Session[]
+  posts           Post[]     @relation("UserPosts")
+  orders          Order[]    @relation("UserOrders")
+}
+
+// Blog Post
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  imageUrl    String?
+  category    String?
+  author      User     @relation("UserPosts", fields: [authorId], references: [id])
+  authorId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Product
+model Product {
+  id             String      @id @default(cuid())
+  name           String
+  description    String
+  price          Decimal
+  imageUrl       String?
+  category       String?
+  digitalFileUrl String?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  orderItems     OrderItem[]
+}
+
+// Order
+model Order {
+  id            String        @id @default(cuid())
+  user          User          @relation("UserOrders", fields: [userId], references: [id])
+  userId        String
+  totalAmount   Decimal
+  status        OrderStatus   @default(PROCESSING)
+  paymentMethod PaymentMethod
+  orderItems    OrderItem[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+// Order Item (Junction table for Order and Product)
+model OrderItem {
+  id        String  @id @default(cuid())
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+  price     Decimal // Price at the time of order
 }
 
 model Patient {
@@ -133,6 +186,17 @@ enum AppointmentStatus {
   COMPLETED
   CANCELLED
   NO_SHOW
+}
+
+enum OrderStatus {
+  PROCESSING
+  COMPLETED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  DIGITAL_PAYMENT
+  PAY_AFTER_DELIVERY
 }
 
 // NextAuth models

@@ -6,42 +6,42 @@ describe('Button', () => {
     render(<Button>Click me</Button>)
     const button = screen.getByRole('button', { name: /click me/i })
     expect(button).toBeInTheDocument()
-    expect(button).toHaveClass('bg-teal-600')
+    expect(button).toHaveClass('bg-primary')
   })
 
   it('renders with outline variant', () => {
     render(<Button variant="outline">Click me</Button>)
     const button = screen.getByRole('button', { name: /click me/i })
     expect(button).toBeInTheDocument()
-    expect(button).toHaveClass('border-teal-600')
+    expect(button).toHaveClass('border-input')
   })
 
   it('renders with secondary variant', () => {
     render(<Button variant="secondary">Click me</Button>)
     const button = screen.getByRole('button', { name: /click me/i })
     expect(button).toBeInTheDocument()
-    expect(button).toHaveClass('bg-gray-100')
+    expect(button).toHaveClass('bg-secondary')
   })
 
   it('renders with destructive variant', () => {
     render(<Button variant="destructive">Click me</Button>)
     const button = screen.getByRole('button', { name: /click me/i })
     expect(button).toBeInTheDocument()
-    expect(button).toHaveClass('bg-red-600')
+    expect(button).toHaveClass('bg-destructive')
   })
 
   it('renders with ghost variant', () => {
     render(<Button variant="ghost">Click me</Button>)
     const button = screen.getByRole('button', { name: /click me/i })
     expect(button).toBeInTheDocument()
-    expect(button).toHaveClass('hover:bg-gray-100')
+    expect(button).toHaveClass('hover:bg-accent')
   })
 
   it('renders with link variant', () => {
     render(<Button variant="link">Click me</Button>)
     const button = screen.getByRole('button', { name: /click me/i })
     expect(button).toBeInTheDocument()
-    expect(button).toHaveClass('text-teal-600')
+    expect(button).toHaveClass('text-primary')
   })
 
   it('renders with correct size', () => {

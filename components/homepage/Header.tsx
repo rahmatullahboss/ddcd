@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,16 +43,14 @@ export default function Header() {
   return (
     <header className="bg-white/30 backdrop-blur-md border border-white/20 shadow-sm sticky top-0 z-50">
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" id="site-name" className={`text-2xl font-bold ${siteNameColor}`}>
+        <Link href="/" id="site-name" className={`text-2xl font-bold ${siteNameColor}`}>
           ডিজিটাল কেয়ার
-        </a>
+        </Link>
         <div className="hidden md:flex space-x-6 items-center">
-          <a href="about.html" className="text-gray-600 hover:text-teal-600">আমাদের সম্পর্কে</a>
-          <a href="services.html" className="text-gray-600 hover:text-teal-600">সার্ভিসসমূহ</a>
-          <a href="blog.html" className="text-gray-600 hover:text-teal-600">ব্লগ</a>
-          <a href="clinic-demo.html" className="text-gray-600 hover:text-teal-600">ক্লিনিক ডেমো</a>
-          <a href="affiliate.html" className="text-gray-600 hover:text-teal-600">অ্যাফিলিয়েট</a>
-          <a href="privacy-policy.html" className="text-gray-600 hover:text-teal-600">গোপনীয়তা নীতি</a>
+          <Link href="/about" className="text-gray-600 hover:text-teal-600">আমাদের সম্পর্কে</Link>
+          <Link href="/services" className="text-gray-600 hover:text-teal-600">সার্ভিসসমূহ</Link>
+          <Link href="/shop" className="text-gray-600 hover:text-teal-600">শপ</Link>
+          <Link href="/blog" className="text-gray-600 hover:text-teal-600">ব্লগ</Link>
           <a href="#contact" className="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 transition duration-300">যোগাযোগ করুন</a>
         </div>
         <div className="md:hidden">
@@ -64,12 +63,10 @@ export default function Header() {
       </nav>
       {/* Mobile Menu */}
       <div id="mobile-menu" className={`md:hidden ${menuOpen ? '' : 'hidden'} px-6 pb-4 space-y-2`}>
-        <a href="about.html" className="block text-gray-600 hover:text-teal-600">আমাদের সম্পর্কে</a>
-        <a href="services.html" className="block text-gray-600 hover:text-teal-600">সার্ভিসসমূহ</a>
-        <a href="blog.html" className="block text-gray-600 hover:text-teal-600">ব্লগ</a>
-        <a href="clinic-demo.html" className="block text-gray-600 hover:text-teal-600">ক্লিনিক ডেমো</a>
-        <a href="affiliate.html" className="block text-gray-600 hover:text-teal-600">অ্যাফিলিয়েট</a>
-        <a href="privacy-policy.html" className="block text-gray-600 hover:text-teal-600">গোপনীয়তা নীতি</a>
+        <Link href="/about" className="block text-gray-600 hover:text-teal-600">আমাদের সম্পর্কে</Link>
+        <Link href="/services" className="block text-gray-600 hover:text-teal-600">সার্ভিসসমূহ</Link>
+        <Link href="/shop" className="block text-gray-600 hover:text-teal-600">শপ</Link>
+        <Link href="/blog" className="block text-gray-600 hover:text-teal-600">ব্লগ</Link>
         <a href="#contact" className="block bg-teal-500 text-white text-center px-4 py-2 rounded-full hover:bg-teal-600 transition duration-300">যোগাযোগ করুন</a>
       </div>
     </header>
