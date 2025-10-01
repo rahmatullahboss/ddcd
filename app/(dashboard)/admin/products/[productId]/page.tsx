@@ -1,11 +1,13 @@
 import { db } from '@/lib/db';
 import ProductForm from './_components/product-form';
 
-export default async function ProductPage({
-  params,
-}: {
-  params: { productId: string };
-}) {
+interface ProductPageProps {
+  params: {
+    productId: string;
+  };
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
   const product = await db.product.findUnique({
     where: {
       id: params.productId,

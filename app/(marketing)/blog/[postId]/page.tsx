@@ -20,7 +20,13 @@ async function getPost(postId: string): Promise<PostWithAuthor | null> {
   }
 }
 
-export default async function PostDetailsPage({ params }: { params: { postId: string } }) {
+interface PostDetailsPageProps {
+  params: {
+    postId: string;
+  };
+}
+
+export default async function PostDetailsPage({ params }: PostDetailsPageProps) {
   const post = await getPost(params.postId);
 
   if (!post) {

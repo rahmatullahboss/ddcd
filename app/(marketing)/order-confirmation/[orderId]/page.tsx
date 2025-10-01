@@ -2,7 +2,13 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { CheckCircle } from 'lucide-react';
 
-export default function OrderConfirmationPage({ params }: { params: { orderId: string } }) {
+interface OrderConfirmationPageProps {
+  params: {
+    orderId: string;
+  };
+}
+
+export default function OrderConfirmationPage({ params }: OrderConfirmationPageProps) {
   return (
     <div className="container mx-auto text-center py-20">
       <div className="flex justify-center mb-4">

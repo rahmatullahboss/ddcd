@@ -15,7 +15,13 @@ async function getProduct(productId: string): Promise<Product | null> {
   }
 }
 
-export default async function ProductDetailsPage({ params }: { params: { productId: string } }) {
+interface ProductDetailsPageProps {
+  params: {
+    productId: string;
+  };
+}
+
+export default async function ProductDetailsPage({ params }: ProductDetailsPageProps) {
   const product = await getProduct(params.productId);
 
   if (!product) {
