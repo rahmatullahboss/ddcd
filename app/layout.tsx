@@ -9,12 +9,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Digital Care - Modern Healthcare Platform',
+    default: 'Digital Care - IT Solutions Agency',
     template: '%s | Digital Care'
   },
-  description: 'Access quality healthcare services online',
-  keywords: ['healthcare', 'telemedicine', 'doctors', 'appointments'],
-  authors: [{ name: 'Rahmatullah' }],
+  description: 'Professional IT services and digital solutions for your business',
+  keywords: ['IT services', 'web development', 'software solutions', 'digital agency'],
+  authors: [{ name: 'Digital Care Team' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -61,7 +61,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="bn" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={inter.variable}>
         {children}
         <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" strategy="afterInteractive" />

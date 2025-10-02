@@ -12,14 +12,14 @@ const users = [
     name: 'John Doe',
     email: 'john@example.com',
     password: 'password123', // In a real app, this would be hashed
-    role: 'patient'
+    role: 'client'
   },
   {
     id: '2',
-    name: 'Dr. Sarah Johnson',
+    name: 'Sarah Johnson',
     email: 'sarah@digitalcare.com',
-    password: 'doctor123', // In a real app, this would be hashed
-    role: 'doctor'
+    password: 'admin123', // In a real app, this would be hashed
+    role: 'admin'
   }
 ]
 

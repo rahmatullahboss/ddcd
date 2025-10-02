@@ -210,7 +210,7 @@ export default function ProfilePage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-900">Email Notifications</p>
-                  <p className="text-sm text-gray-500">Receive email updates about appointments and health tips</p>
+                  <p className="text-sm text-gray-500">Receive email updates about project status and important announcements</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" defaultChecked />
@@ -221,7 +221,7 @@ export default function ProfilePage() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-gray-900">SMS Notifications</p>
-                  <p className="text-sm text-gray-500">Receive text message reminders for appointments</p>
+                  <p className="text-sm text-gray-500">Receive text message updates for urgent project matters</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" />
@@ -231,8 +231,8 @@ export default function ProfilePage() {
               
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-900">Health Data Sharing</p>
-                  <p className="text-sm text-gray-500">Allow sharing of health data with research studies</p>
+                  <p className="text-sm font-medium text-gray-900">Data Sharing</p>
+                  <p className="text-sm text-gray-500">Allow sharing of project data with team members</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input type="checkbox" className="sr-only peer" />

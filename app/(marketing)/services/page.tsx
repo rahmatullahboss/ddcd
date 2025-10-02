@@ -1,43 +1,43 @@
 export default function ServicesPage() {
   const services = [
     {
-      title: "Telemedicine Consultations",
-      description: "Connect with healthcare providers from the comfort of your home through secure video calls.",
-      icon: "🩺",
+      title: "Web Development",
+      description: "Custom website development with modern technologies and responsive design.",
+      icon: "💻",
     },
     {
-      title: "Appointment Booking",
-      description: "Easily schedule appointments with your preferred healthcare providers.",
-      icon: "📅",
+      title: "Mobile App Development",
+      description: "Native and cross-platform mobile applications for iOS and Android.",
+      icon: "📱",
     },
     {
-      title: "Digital Prescriptions",
-      description: "Receive and manage your prescriptions digitally with our secure platform.",
-      icon: "💊",
+      title: "UI/UX Design",
+      description: "User-centered design solutions that enhance user experience and engagement.",
+      icon: "🎨",
     },
     {
-      title: "Health Records Management",
-      description: "Access and manage your medical records securely in one place.",
-      icon: "📋",
+      title: "Cloud Solutions",
+      description: "Scalable cloud infrastructure and migration services for your business.",
+      icon: "☁️",
     },
     {
-      title: "Lab Test Booking",
-      description: "Book diagnostic tests and receive results directly on the platform.",
-      icon: "🧬",
+      title: "IT Consulting",
+      description: "Strategic technology consulting to help your business grow and innovate.",
+      icon: "📊",
     },
     {
-      title: "Health Monitoring",
-      description: "Track your health metrics and receive personalized insights.",
-      icon: "📈",
+      title: "Cybersecurity",
+      description: "Comprehensive security solutions to protect your digital assets.",
+      icon: "🔒",
     },
   ]
 
   return (
     <div className="container py-12">
       <div className="max-w-4xl mx-auto text-center mb-12">
-        <h1 className="text-4xl font-bold mb-4">Our Healthcare Services</h1>
+        <h1 className="text-4xl font-bold mb-4">Our IT Services</h1>
         <p className="text-lg text-gray-600">
-          We offer a comprehensive range of digital healthcare services designed to make quality care accessible and convenient.
+          We offer a comprehensive range of digital IT services designed to help your business thrive in the digital world.
         </p>
       </div>
       

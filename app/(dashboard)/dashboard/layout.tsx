@@ -14,9 +14,8 @@ export default function DashboardLayout({
               <h1 className="text-xl font-bold text-teal-600">Digital Care</h1>
               <nav className="ml-10 hidden md:flex space-x-8">
                 <a href="/dashboard" className="text-gray-900 font-medium">Dashboard</a>
-                <a href="/dashboard/appointments" className="text-gray-500 hover:text-gray-900">Appointments</a>
-                <a href="/dashboard/prescriptions" className="text-gray-500 hover:text-gray-900">Prescriptions</a>
-                <a href="/dashboard/medical-records" className="text-gray-500 hover:text-gray-900">Medical Records</a>
+                <a href="/dashboard/orders" className="text-gray-500 hover:text-gray-900">Orders</a>
+                <a href="/dashboard/profile" className="text-gray-500 hover:text-gray-900">Profile</a>
               </nav>
             </div>
             <div className="flex items-center space-x-4">

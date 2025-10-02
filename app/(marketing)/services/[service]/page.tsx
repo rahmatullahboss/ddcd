@@ -3,40 +3,40 @@ import { notFound } from 'next/navigation'
 // Mock data for services
 const services = [
   {
-    id: 'telemedicine',
-    name: 'Telemedicine Consultations',
-    description: 'Connect with healthcare professionals from the comfort of your home through secure video consultations.',
+    id: 'web-development',
+    name: 'Web Development',
+    description: 'Custom website development with modern technologies and responsive design.',
     features: [
-      '24/7 access to healthcare professionals',
-      'Secure video consultations',
-      'Prescription services',
-      'Follow-up care'
+      'Responsive design for all devices',
+      'Modern frameworks and technologies',
+      'SEO optimization',
+      'Ongoing support and maintenance'
     ],
-    image: '/images/telemedicine.jpg'
+    image: '/images/web-development.jpg'
   },
   {
-    id: 'health-monitoring',
-    name: 'Health Monitoring',
-    description: 'Track your vital signs and health metrics with our advanced monitoring system.',
+    id: 'mobile-apps',
+    name: 'Mobile App Development',
+    description: 'Native and cross-platform mobile applications for iOS and Android.',
     features: [
-      'Real-time health tracking',
-      'Automated alerts',
-      'Data analytics',
-      'Integration with wearable devices'
+      'Native iOS and Android development',
+      'Cross-platform solutions',
+      'App store deployment',
+      'Performance optimization'
     ],
-    image: '/images/health-monitoring.jpg'
+    image: '/images/mobile-apps.jpg'
   },
   {
-    id: 'prescription-management',
-    name: 'Prescription Management',
-    description: 'Manage your prescriptions digitally with refill reminders and pharmacy integration.',
+    id: 'ui-ux-design',
+    name: 'UI/UX Design',
+    description: 'User-centered design solutions that enhance user experience and engagement.',
     features: [
-      'Digital prescription storage',
-      'Refill reminders',
-      'Pharmacy integration',
-      'Medication interaction alerts'
+      'User research and analysis',
+      'Wireframing and prototyping',
+      'Interactive design systems',
+      'Usability testing'
     ],
-    image: '/images/prescription.jpg'
+    image: '/images/ui-ux-design.jpg'
   }
 ]
 
@@ -93,11 +93,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <div className="bg-teal-50 rounded-lg p-8">
         <h2 className="text-2xl font-semibold mb-4 text-center">Ready to get started?</h2>
         <p className="text-center text-gray-700 mb-6">
-          Join thousands of patients who trust Digital Care for their healthcare needs.
+          Join hundreds of businesses who trust Digital Care for their IT solutions.
         </p>
         <div className="flex justify-center">
           <button className="bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-300">
-            Book a Consultation
+            Request a Quote
           </button>
         </div>
       </div>
