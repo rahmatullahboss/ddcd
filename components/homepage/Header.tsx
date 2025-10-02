@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import MiniCart from '@/components/shop/mini-cart';
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -52,8 +53,10 @@ export default function Header() {
           <Link href="/shop" className="text-gray-600 hover:text-teal-600">শপ</Link>
           <Link href="/blog" className="text-gray-600 hover:text-teal-600">ব্লগ</Link>
           <a href="#contact" className="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 transition duration-300">যোগাযোগ করুন</a>
+          <MiniCart />
         </div>
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center gap-4">
+          <MiniCart />
           <button id="menu-btn" className="text-gray-600 focus:outline-none" aria-label="মেনু খুলুন বা বন্ধ করুন" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
