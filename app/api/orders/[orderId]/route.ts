@@ -2,21 +2,15 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { currentRole } from "@/lib/auth";
+import { OrderStatus } from "@prisma/client";
 
 const updateStatusSchema = z.object({
-  status: z.enum([
-    "PENDING",
-    "PROCESSING",
-    "SHIPPED",
-    "COMPLETED",
-    "CANCELLED",
-    "REFUNDED",
-  ]),
+  status: z.nativeEnum(OrderStatus),
 });
 
 export async function PATCH(
   req: Request,
-  { params }: { params: { orderId: string } }
+  { params }: { params: Promise<{ orderId: string }> }
 ) {
   try {
     const role = await currentRole();
@@ -25,7 +19,7 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const { orderId } = params;
+    const { orderId } = await params;
     const body = await req.json();
     const validation = updateStatusSchema.safeParse(body);
 
@@ -45,9 +39,9 @@ export async function PATCH(
 
     // If order is being cancelled or refunded, restore product stock
     if (
-      (status === "CANCELLED" || status === "REFUNDED") &&
-      order.status !== "CANCELLED" &&
-      order.status !== "REFUNDED"
+      (status === OrderStatus.CANCELLED || status === OrderStatus.REFUNDED) &&
+      order.status !== OrderStatus.CANCELLED &&
+      order.status !== OrderStatus.REFUNDED
     ) {
       const orderItems = await db.orderItem.findMany({
         where: { orderId },
@@ -57,7 +51,11 @@ export async function PATCH(
         for (const item of orderItems) {
           await prisma.product.update({
             where: { id: item.productId },
-            data: { stock: { increment: item.quantity } },
+            data: { 
+              stock: { 
+                increment: item.quantity 
+              } 
+            },
           });
         }
         await prisma.order.update({

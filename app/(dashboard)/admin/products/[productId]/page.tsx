@@ -15,6 +15,10 @@ export default async function ProductPage({ params }: ProductPageProps) {
     where: {
       id: productId,
     },
+    include: {
+      images: true,
+      category: true,
+    },
   });
 
   return (

@@ -41,8 +41,8 @@ export default function ProductForm({ initialData }: ProductFormProps) {
     name: initialData.name,
     description: initialData.description,
     price: parseFloat(String(initialData.price)),
-    imageUrl: initialData.imageUrl || '',
-    category: initialData.category || '',
+    imageUrl: '',
+    category: initialData.categoryId || '',
     digitalFileUrl: initialData.digitalFileUrl || '',
   } : {
     name: '',
@@ -143,9 +143,9 @@ export default function ProductForm({ initialData }: ProductFormProps) {
             name="category"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Category</FormLabel>
+                <FormLabel>Category ID</FormLabel>
                 <FormControl>
-                  <Input placeholder="e.g., Digital Goods" {...field} />
+                  <Input placeholder="e.g., category-id" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
