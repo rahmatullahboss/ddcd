@@ -88,3 +88,25 @@ The application should now be running at `http://localhost:3000`.
 - `.env` files are excluded from git for security
 - All packages have been upgraded to versions compatible with React 19
 - Vercel deployment configured with appropriate build settings
+- Database migrations must be run manually or through deployment scripts
+
+### Post-Deployment Steps
+After deploying to Vercel, you need to run database migrations:
+
+1. **Using Vercel CLI:**
+   ```bash
+   vercel env pull
+   npx prisma migrate deploy
+   ```
+
+2. **Using the API endpoint (development only):**
+   POST request to `/api/migrate`
+
+3. **Using GitHub Actions:**
+   The workflow will automatically run after successful deployment
+
+### Environment Variables Required for Production
+- `DATABASE_URL`: Your production PostgreSQL connection string
+- `DIRECT_URL`: Your direct database connection string (often the same as DATABASE_URL)
+- `NEXTAUTH_SECRET`: A secret key for NextAuth.js
+- `NEXT_PUBLIC_APP_URL`: Your production URL (e.g., https://your-app.vercel.app)
