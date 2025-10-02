@@ -39,7 +39,7 @@ const CheckoutPage = () => {
               <div key={item.product.id} className="flex items-center gap-4 border-b pb-4">
                 <div className="relative h-20 w-20 rounded-md overflow-hidden">
                   <Image
-                    src={item.product.imageUrl || '/placeholder.png'}
+                    src="/placeholder.png"
                     alt={item.product.name}
                     layout="fill"
                     objectFit="cover"

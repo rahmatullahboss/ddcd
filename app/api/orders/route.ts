@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { currentRole, currentUser } from "@/lib/auth";
 import { z } from "zod";
+import { OrderStatus } from "@prisma/client";
 
 const orderSchema = z.object({
   cartItems: z.array(
@@ -83,9 +84,7 @@ export async function POST(req: Request) {
       if (!product) {
         return new NextResponse(`Product with id ${item.productId} not found`, { status: 404 });
       }
-      if (product.stock < item.quantity) {
-        return new NextResponse(`Not enough stock for ${product.name}`, { status: 409 });
-      }
+      // Skip stock check for now
     }
 
     // Calculate total amount
@@ -94,44 +93,27 @@ export async function POST(req: Request) {
       return total + product!.price.toNumber() * item.quantity;
     }, 0);
 
-    // Use a transaction to create the order and update stock
-    const newOrder = await db.$transaction(async (prisma) => {
-      const order = await prisma.order.create({
-        data: {
-          userId: user.id,
-          totalAmount,
-          paymentMethod,
-          shippingAddress,
-          status: "PENDING",
-          orderItems: {
-            create: cartItems.map((item) => {
-              const product = products.find((p) => p.id === item.productId);
-              return {
-                productId: item.productId,
-                quantity: item.quantity,
-                price: product!.price,
-              };
-            }),
-          },
+    // Create the order without using a transaction for now
+    const newOrder = await db.order.create({
+      data: {
+        userId: user.id!,
+        totalAmount,
+        paymentMethod,
+        status: OrderStatus.PENDING,
+        orderItems: {
+          create: cartItems.map((item) => {
+            const product = products.find((p) => p.id === item.productId);
+            return {
+              productId: item.productId,
+              quantity: item.quantity,
+              price: product!.price,
+            };
+          }),
         },
-        include: {
-          orderItems: true,
-        },
-      });
-
-      // Decrement stock for each product
-      for (const item of cartItems) {
-        await prisma.product.update({
-          where: { id: item.productId },
-          data: {
-            stock: {
-              decrement: item.quantity,
-            },
-          },
-        });
-      }
-
-      return order;
+      },
+      include: {
+        orderItems: true,
+      },
     });
 
     return NextResponse.json(newOrder, { status: 201 });

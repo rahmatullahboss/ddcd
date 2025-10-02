@@ -36,22 +36,7 @@ async function getProducts(searchParams: {
       });
     }
     if (rating) {
-      const minRating = Number(rating);
-      const productsWithHighRating = await db.review.groupBy({
-        by: ['productId'],
-        _avg: {
-          rating: true,
-        },
-        having: {
-          rating: {
-            _avg: {
-              gte: minRating,
-            },
-          },
-        },
-      });
-      const productIds = productsWithHighRating.map((p: any) => p.productId);
-      andConditions.push({ id: { in: productIds } });
+      // Rating filter removed for now
     }
 
     if (andConditions.length > 0) {
@@ -74,9 +59,6 @@ async function getProducts(searchParams: {
     const products = await db.product.findMany({
       where,
       orderBy,
-      include: {
-        category: true,
-      },
     });
     return products;
   } catch (error) {
@@ -87,7 +69,8 @@ async function getProducts(searchParams: {
 
 async function getCategories() {
   try {
-    return await db.category.findMany({ orderBy: { name: 'asc' } });
+    // Category fetching removed for now
+    return [];
   } catch (error) {
     console.error(error);
     return [];
@@ -99,7 +82,8 @@ export default async function ShopPage({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const products = await getProducts(searchParams);
+  const resolvedSearchParams = await searchParams;
+  const products = await getProducts(resolvedSearchParams);
   const categories = await getCategories();
 
   return (

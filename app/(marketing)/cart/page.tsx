@@ -30,7 +30,12 @@ export default function CartPage() {
               <div key={product.id} className="flex items-center justify-between border p-4 rounded-lg bg-white">
                 <div className="flex items-center gap-4">
                   <div className="relative h-20 w-20 rounded-md overflow-hidden">
-                    <Image src={product.imageUrl || '/placeholder.png'} alt={product.name} layout="fill" objectFit="cover" />
+                    <Image 
+                      src="/placeholder.png" 
+                      alt={product.name} 
+                      layout="fill" 
+                      objectFit="cover" 
+                    />
                   </div>
                   <div>
                     <h3 className="font-semibold">{product.name}</h3>

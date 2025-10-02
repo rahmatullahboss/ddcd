@@ -8,8 +8,18 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Edit, Trash } from 'lucide-react';
 import { toast } from 'sonner'; // Assuming you have a toast library like sonner
 
+// Define a type for Product with category relation
+type ProductWithCategory = Product & {
+  category?: {
+    id: string;
+    name: string;
+    createdAt: Date;
+    updatedAt: Date;
+  } | null;
+};
+
 interface ProductsClientProps {
-  products: Product[];
+  products: ProductWithCategory[];
 }
 
 export default function ProductsClient({ products: initialProducts }: ProductsClientProps) {
@@ -54,7 +64,7 @@ export default function ProductsClient({ products: initialProducts }: ProductsCl
           {products.map((product) => (
             <TableRow key={product.id}>
               <TableCell>{product.name}</TableCell>
-              <TableCell>{product.category}</TableCell>
+              <TableCell>{product.category?.name || 'No category'}</TableCell>
               <TableCell>${Number(product.price).toFixed(2)}</TableCell>
               <TableCell className="text-right">
                 <Button

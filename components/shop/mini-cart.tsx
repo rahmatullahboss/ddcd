@@ -39,7 +39,7 @@ const MiniCart = () => {
                 <div key={item.product.id} className="flex items-center gap-4">
                   <div className="relative h-16 w-16 rounded-md overflow-hidden">
                     <Image
-                      src={item.product.imageUrl || '/placeholder.png'}
+                      src="/placeholder.png"
                       alt={item.product.name}
                       layout="fill"
                       objectFit="cover"

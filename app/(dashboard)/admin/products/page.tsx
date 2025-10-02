@@ -8,6 +8,9 @@ export default async function ManageProductsPage() {
     orderBy: {
       createdAt: 'desc',
     },
+    include: {
+      category: true,
+    },
   });
 
   return (
