@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { db } from './db';
-import { getCurrentUser } from './auth';
+import { currentUser as getCurrentUser } from './auth';
 
 const reviewSchema = z.object({
   rating: z.number().min(1).max(5),

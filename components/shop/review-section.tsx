@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { getCurrentUser } from '@/lib/auth';
+import { currentUser as getCurrentUser } from '@/lib/auth';
 import ReviewForm from './review-form';
 import ReviewList from './review-list';
 
