@@ -43,7 +43,7 @@ export async function submitReview(values: z.infer<typeof reviewSchema>) {
     await db.review.create({
       data: {
         productId,
-        userId: user.id,
+        userId: user.id!, // Add type assertion to tell TypeScript that user.id is not undefined
         rating,
         comment,
       },
